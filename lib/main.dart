@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gank_flutter/common/constant/colors.dart';
+import 'package:gank_flutter/common/localization/gank_localization_delegate.dart';
+import 'package:gank_flutter/common/localization/gank_localizations_wrapper.dart';
 import 'package:gank_flutter/redux/app_state.dart';
 import 'package:gank_flutter/ui/home_page.dart';
 import 'package:gank_flutter/ui/splash_page.dart';
 import 'package:redux/redux.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(GankApp());
 
@@ -28,12 +31,18 @@ class GankApp extends StatelessWidget {
       child: StoreBuilder<AppState>(builder: (context, store) {
         return MaterialApp(
           theme: store.state.themeData,
-//          locale: store.state.locale,
-//          supportedLocales: [store.state.locale],
-//          initialRoute: SplashPage.ROUTE_NAME,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GankLocalizationDelegate.delegate
+          ],
+          locale: store.state.locale,
+          supportedLocales: [store.state.locale],
           routes: {
-            SplashPage.ROUTE_NAME: (context) => SplashPage(),
-            HomePage.ROUTE_NAME:(context)=>HomePage(),
+            ///注意只需要包裹第一次打开的页面，BuildContext 会传递给子widget树.
+            SplashPage.ROUTE_NAME: (context) =>
+                GankLocalizationsWrapper(child: SplashPage()),
+            HomePage.ROUTE_NAME: (context) => HomePage(),
           },
         );
       }),

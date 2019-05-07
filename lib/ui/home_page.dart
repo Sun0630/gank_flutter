@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gank_flutter/common/manager/app_manager.dart';
+import 'package:gank_flutter/utils/commonUtils.dart';
 import 'package:gank_flutter/widget/widget_cion_font.dart';
 import 'package:gank_flutter/widget/widget_gank_drawer.dart';
-
 class HomePage extends StatefulWidget {
   static const String ROUTE_NAME = 'home';
 
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       title: Offstage(
         offstage: false,
-        child: Text('今日最新干货'),
+        child: Text(CommonUtils.getLocale(context).homeTitle),
       ),
       actions: <Widget>[_buildActions()],
     );
@@ -38,7 +39,8 @@ class _HomePageState extends State<HomePage> {
           size: 22,
           color: Colors.white,
         ),
-        onPressed: null);
+        onPressed: (){
+        });
   }
 
   IconData getActionsIcon() {
