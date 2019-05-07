@@ -4,8 +4,8 @@ import 'package:gank_flutter/common/constant/colors.dart';
 import 'package:gank_flutter/common/localization/gank_localization_delegate.dart';
 import 'package:gank_flutter/common/localization/gank_localizations_wrapper.dart';
 import 'package:gank_flutter/redux/app_state.dart';
-import 'package:gank_flutter/ui/home_page.dart';
-import 'package:gank_flutter/ui/splash_page.dart';
+import 'package:gank_flutter/ui/page/home_page.dart';
+import 'package:gank_flutter/ui/page/splash_page.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

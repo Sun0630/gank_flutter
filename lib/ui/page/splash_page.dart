@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gank_flutter/ui/home_page.dart';
+import 'package:gank_flutter/ui/page/home_page.dart';
 
 class SplashPage extends StatefulWidget {
   static const String ROUTE_NAME = '/';

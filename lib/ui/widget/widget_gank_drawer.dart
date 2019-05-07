@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gank_flutter/redux/app_state.dart';
-import 'package:gank_flutter/widget/widget_sizable_drawer.dart';
+import 'package:gank_flutter/ui/widget/widget_sizable_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 /// 自定义Drawer
