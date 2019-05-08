@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:gank_flutter/api/api_gank.dart';
 import 'package:gank_flutter/model/gank_item_entity.dart';
 import 'package:gank_flutter/model/gank_post.dart';
+import 'package:gank_flutter/ui/page/gallery_page.dart';
 import 'package:gank_flutter/ui/widget/indicator_factory.dart';
+import 'package:gank_flutter/ui/widget/widget_list_item.dart';
 import 'package:gank_flutter/ui/widget/widget_list_title.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,6 +17,7 @@ class NewPage extends StatefulWidget {
 
 class _NewPageState extends State<NewPage> {
   bool _isLoadig = true;
+  String _date;
   String _girlImage;
   List<GankItemEntity> _gankItems;
   RefreshController _refreshController;
@@ -43,6 +46,7 @@ class _NewPageState extends State<NewPage> {
           child: SmartRefresher(
             enablePullDown: true,
             enablePullUp: false,
+            onRefresh: _onRefresh,
             controller: _refreshController,
             header: buildDefaultHeader(context, 0),
 //            header: ClassicHeader(),
@@ -70,7 +74,7 @@ class _NewPageState extends State<NewPage> {
             GankItemEntity gankItemEntity = _gankItems[position - 1];
             return gankItemEntity.isTitle
                 ? GankItemTitle(gankItemEntity.category)
-                : Text('数据${position}');
+                : GankListItem(gankItemEntity);
           }
         });
   }
@@ -98,11 +102,20 @@ class _NewPageState extends State<NewPage> {
   /// 广告头
   GestureDetector _buildImageBanner(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return GalleryPage([_girlImage], '');
+          }));
+        },
         child: CachedNetworkImage(
           imageUrl: _girlImage,
           height: 200,
           fit: BoxFit.cover,
         ));
+  }
+
+  Future _onRefresh() async {
+    await getNewData(isRefresh: true);
+    _refreshController.refreshCompleted();
   }
 }
