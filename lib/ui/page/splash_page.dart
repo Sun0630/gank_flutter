@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gank_flutter/common/manager/app_manager.dart';
 import 'package:gank_flutter/ui/page/home_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -8,16 +9,15 @@ class SplashPage extends StatefulWidget {
   _SplashPageState createState() => _SplashPageState();
 }
 
-
 class _SplashPageState extends State<SplashPage> {
-
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // 生命周期函数,紧跟着initState调用
-    Future.delayed(const Duration(seconds: 3),(){
-      Navigator.pushReplacementNamed(context, HomePage.ROUTE_NAME);
+    AppManager.initApp(context).then((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(context, HomePage.ROUTE_NAME);
+      });
     });
   }
 
