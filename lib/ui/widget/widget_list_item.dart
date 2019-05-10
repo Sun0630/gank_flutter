@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gank_flutter/model/gank_item_entity.dart';
 import 'package:gank_flutter/ui/page/gallery_page.dart';
+import 'package:gank_flutter/ui/page/web_view_page.dart';
 import 'package:gank_flutter/ui/widget/widget_cion_font.dart';
 import 'package:gank_flutter/utils/time_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,7 +20,9 @@ class _GankListItemState extends State<GankListItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+          return WebViewPage(widget.gankItemEntity);
+        }));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -106,8 +109,9 @@ class _GankListItemState extends State<GankListItem> {
       var imageUrl = widget.gankItemEntity.images[0];
       contentWidgets.add(GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context){
-            return GalleryPage(widget.gankItemEntity.images,widget.gankItemEntity.desc);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return GalleryPage(
+                widget.gankItemEntity.images, widget.gankItemEntity.desc);
           }));
         },
         child: Container(

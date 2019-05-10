@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gank_flutter/api/api_gank.dart';
+import 'package:gank_flutter/common/event/event_refresh_new.dart';
+import 'package:gank_flutter/common/event/event_show_history_date.dart';
+import 'package:gank_flutter/common/manager/app_manager.dart';
 import 'package:gank_flutter/model/gank_item_entity.dart';
 import 'package:gank_flutter/model/gank_post.dart';
 import 'package:gank_flutter/ui/page/gallery_page.dart';
@@ -26,7 +29,12 @@ class _NewPageState extends State<NewPage> {
   void initState() {
     super.initState();
     _refreshController = RefreshController();
-
+    AppManager.eventBus.on<RefreshNewEvent>().listen((event) {
+      if (mounted) {
+        _date = event.date;
+        getNewData(date: _date);
+      }
+    });
     getNewData();
   }
 
@@ -87,7 +95,12 @@ class _NewPageState extends State<NewPage> {
 //      });
 //    }
 
-    var todayJson = await GankApi.getTodayData();
+    var todayJson;
+    if (date == null) {
+      todayJson = await GankApi.getTodayData();
+    } else {
+      todayJson = await GankApi.getSpecialDayData(date);
+    }
 
     var todayItem = GankPost.fromJson(todayJson);
 
@@ -115,7 +128,7 @@ class _NewPageState extends State<NewPage> {
   }
 
   Future _onRefresh() async {
-    await getNewData(isRefresh: true);
+    await getNewData(date: _date, isRefresh: true);
     _refreshController.refreshCompleted();
   }
 }

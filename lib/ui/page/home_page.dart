@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gank_flutter/api/api_gank.dart';
+import 'package:gank_flutter/common/event/event_refresh_new.dart';
+import 'package:gank_flutter/common/event/event_show_history_date.dart';
 import 'package:gank_flutter/common/manager/app_manager.dart';
 import 'package:gank_flutter/ui/page/category_page.dart';
 import 'package:gank_flutter/ui/page/favorite_page.dart';
@@ -7,7 +10,9 @@ import 'package:gank_flutter/ui/page/welfare_page.dart';
 import 'package:gank_flutter/ui/widget/widget_bottom_tab.dart';
 import 'package:gank_flutter/ui/widget/widget_cion_font.dart';
 import 'package:gank_flutter/ui/widget/widget_gank_drawer.dart';
+import 'package:gank_flutter/ui/widget/widget_history_date.dart';
 import 'package:gank_flutter/utils/commonUtils.dart';
+import 'package:event_bus/event_bus.dart';
 
 class HomePage extends StatefulWidget {
   static const String ROUTE_NAME = 'home';
@@ -18,11 +23,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PageController _pageController;
+  List _historyData;
+  String _currentDate = '';
+  int _currentPageIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
+    _getHistoryDate();
+    _registerEventListener();
   }
 
   @override
@@ -48,7 +58,8 @@ class _HomePageState extends State<HomePage> {
             WelfarePage(),
             FavoritePage()
           ],
-        )
+        ),
+        HistoryDate(_historyData)
       ],
     );
   }
@@ -59,7 +70,7 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       title: Offstage(
         offstage: false,
-        child: Text(CommonUtils.getLocale(context).homeTitle),
+        child: Text(_currentDate ?? ''),
       ),
       actions: <Widget>[_buildActions()],
     );
@@ -73,7 +84,10 @@ class _HomePageState extends State<HomePage> {
           size: 22,
           color: Colors.white,
         ),
-        onPressed: () {});
+        onPressed: () {
+          // 弹出日期选择
+          AppManager.notifyShowHistoryDate();
+        });
   }
 
   IconData getActionsIcon() {
@@ -81,6 +95,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _pageChanged(int index) {
-    setState(() {});
+    if(index != 0){
+      AppManager.eventBus.fire(ShowHistoryDateEvent.hide());
+    }
+    setState(() {
+    });
+  }
+
+  Future _getHistoryDate() async {
+    var historyData = await GankApi.getHistoryDateData();
+    setState(() {
+      _historyData = historyData;
+      _currentDate = CommonUtils.getLocale(context).homeTitle;
+    });
+  }
+
+  /// 注册事件监听器
+  void _registerEventListener() {
+    AppManager.eventBus.on<RefreshNewEvent>().listen((event) {
+      if (mounted) {
+        setState(() {
+          _currentDate = event.date;
+        });
+      }
+    });
   }
 }
