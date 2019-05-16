@@ -7,7 +7,7 @@ import 'package:gank_flutter/utils/commonUtils.dart';
 import 'package:gank_flutter/utils/time_utils.dart';
 
 class HistoryDate extends StatefulWidget {
-  List _historyDate;
+  final List _historyDate;
 
   HistoryDate(this._historyDate);
 
@@ -31,34 +31,40 @@ class _HistoryDateState extends State<HistoryDate>
   void initState() {
     super.initState();
     // 初始化动画相关
-    _controllerHistoryDate =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _controllerHistoryDate = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
     _historyDateContentsOpacity = CurvedAnimation(
         parent: ReverseAnimation(_controllerHistoryDate),
         curve: Curves.fastOutSlowIn);
 
-    _historyDateDetailsTween =
-        Tween<Offset>(begin: const Offset(0.0, -0.1), end: Offset.zero)
-            .chain(CurveTween(curve: Curves.fastOutSlowIn));
+
+    _historyDateDetailsTween = Tween<Offset>(
+      begin: const Offset(0.0, -1.0),
+      end: Offset.zero,
+    ).chain(CurveTween(
+      curve: Curves.fastOutSlowIn,
+    ));
 
     _historyDateDetailPosition =
         _controllerHistoryDate.drive(_historyDateDetailsTween);
 
-    // 接收藏page_home发送的event
+    ///设置当前高亮日期
+    if (widget._historyDate != null && widget._historyDate.isNotEmpty) {
+      _currentDate = widget._historyDate[0];
+    }
+
+    ///事件监听
     AppManager.eventBus.on<ShowHistoryDateEvent>().listen((event) {
       if (mounted) {
-        // 挂载成功，视图树渲染完毕
         if (event.forceHide) {
           _showHistoryDate = false;
         } else {
           _showHistoryDate = !_showHistoryDate;
         }
-
-        if (_showHistoryDate) {
+        if (_showHistoryDate)
           _controllerHistoryDate.forward();
-        } else {
+        else
           _controllerHistoryDate.reverse();
-        }
       }
     });
   }
@@ -71,7 +77,7 @@ class _HistoryDateState extends State<HistoryDate>
         opacity: ReverseAnimation(_historyDateContentsOpacity),
         child: Card(
           elevation: 5.0,
-          margin: EdgeInsets.all(0),
+          margin: EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
           child: Container(
             color: Colors.white,
             height: 50,

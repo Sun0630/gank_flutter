@@ -28,26 +28,23 @@ Widget buildDefaultFooter(BuildContext context, int mode,
     [Function requestLoad]) {
   if (mode == RefreshStatus.failed || mode == RefreshStatus.idle) {
     return new InkWell(
-      child: new ClassicHeader(
+      child: new ClassicFooter(
 //          mode: mode,
           idleIcon: new Icon(Icons.arrow_upward, color: Colors.black),
           textStyle: Theme.of(context).textTheme.body2,
-          refreshingText: '正在加载中...',
+          loadingText: '正在加载中...',
           idleText: '上拉加载',
-          failedText: '网络异常',
-//          noDataText: '没有更多数据'
+          noDataText: '没有更多数据'
       ),
       onTap: requestLoad,
     );
   } else
-    return new ClassicHeader(
+    return new ClassicFooter(
 //        mode: mode,
         idleIcon: new Icon(Icons.arrow_upward, color: Colors.black),
         textStyle: Theme.of(context).textTheme.body2,
-        refreshingText: '正在加载中...',
+        loadingText: '正在加载中...',
         idleText: '上拉加载',
-        failedText: '网络异常',
-
-//        noDataText: '没有更多数据'
+        noDataText: '没有更多数据'
     );
 }

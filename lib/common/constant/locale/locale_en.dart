@@ -7,4 +7,17 @@ class StringEn extends StringBase{
 
   @override
   String get homeTitle => 'Today New Gank';
+
+  @override
+  // TODO: implement gankAllCategories
+  List<String> get gankAllCategories => <String>[
+    '全部',
+    'Android',
+    'iOS',
+    'App',
+    '前端',
+    '瞎推荐',
+    '拓展资源',
+    '休息视频'
+  ];
 }

@@ -85,13 +85,30 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
         ),
         onPressed: () {
-          // 弹出日期选择
-          AppManager.notifyShowHistoryDate();
+          if(_currentPageIndex == 0){
+            // 弹出日期选择
+            AppManager.notifyShowHistoryDate();
+          }else if(_currentPageIndex == 1){
+            // 去搜索页
+          }else if(_currentPageIndex == 2){
+
+          }else{
+
+          }
+
         });
   }
 
   IconData getActionsIcon() {
-    return IconFont(0xe8a6);
+    if(_currentPageIndex == 0){
+      return IconFont(0xe8a6);
+    }else if(_currentPageIndex == 1){
+      return IconFont(0xe783);
+    }else if(_currentPageIndex == 2){
+      return IconFont(0xe63a);
+    }else{
+      return IconFont(0xe619);
+    }
   }
 
   void _pageChanged(int index) {
@@ -99,6 +116,9 @@ class _HomePageState extends State<HomePage> {
       AppManager.eventBus.fire(ShowHistoryDateEvent.hide());
     }
     setState(() {
+      if(_currentPageIndex != index){
+        _currentPageIndex = index;
+      }
     });
   }
 

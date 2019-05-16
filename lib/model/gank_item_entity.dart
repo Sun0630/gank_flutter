@@ -30,8 +30,8 @@ class GankItemEntity {
     used = json['used'];
     type = json['type'];
     url = json['url'];
-    desc = json['desc'];
-    who = json['who'];
+    desc = json['desc']??'';
+    who = json['who']??'Github';
   }
 
   Map<String, dynamic> toJson() {

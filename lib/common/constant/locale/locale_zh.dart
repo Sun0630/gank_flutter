@@ -6,4 +6,16 @@ class StringZh extends StringBase {
 
   @override
   String get homeTitle => '今日最新干货';
+
+  @override
+  List<String> get gankAllCategories => <String>[
+    'All',
+    'Android',
+    'iOS',
+    'App',
+    'Web',
+    'Recomend',
+    'Extra',
+    'Video'
+  ];
 }

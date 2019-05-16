@@ -18,7 +18,7 @@ class NewPage extends StatefulWidget {
   _NewPageState createState() => _NewPageState();
 }
 
-class _NewPageState extends State<NewPage> {
+class _NewPageState extends State<NewPage> with AutomaticKeepAliveClientMixin{
   bool _isLoadig = true;
   String _date;
   String _girlImage;
@@ -88,12 +88,12 @@ class _NewPageState extends State<NewPage> {
   }
 
   /// 获取首页数据
-  Future getNewData({String date, bool isRefresh}) async {
-//    if (!isRefresh) {
-//      setState(() {
-//        _isLoadig = true;
-//      });
-//    }
+  Future getNewData({String date, bool isRefresh = false}) async {
+    if (!isRefresh) {
+      setState(() {
+        _isLoadig = true;
+      });
+    }
 
     var todayJson;
     if (date == null) {
@@ -131,4 +131,7 @@ class _NewPageState extends State<NewPage> {
     await getNewData(date: _date, isRefresh: true);
     _refreshController.refreshCompleted();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
