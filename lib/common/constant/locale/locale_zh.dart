@@ -8,6 +8,9 @@ class StringZh extends StringBase {
   String get homeTitle => '今日最新干货';
 
   @override
+  String get gankWelfare => '福利';
+
+  @override
   List<String> get gankAllCategories => <String>[
     'All',
     'Android',

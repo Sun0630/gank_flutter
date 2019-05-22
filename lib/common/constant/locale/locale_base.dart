@@ -5,4 +5,6 @@ class StringBase{
   String homeTitle;
 
   List<String> gankAllCategories;
+
+  String gankWelfare;
 }

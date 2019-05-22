@@ -9,6 +9,9 @@ class StringEn extends StringBase{
   String get homeTitle => 'Today New Gank';
 
   @override
+  String get gankWelfare => 'Welfare';
+
+  @override
   // TODO: implement gankAllCategories
   List<String> get gankAllCategories => <String>[
     '全部',

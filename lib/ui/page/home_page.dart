@@ -12,10 +12,9 @@ import 'package:gank_flutter/ui/widget/widget_cion_font.dart';
 import 'package:gank_flutter/ui/widget/widget_gank_drawer.dart';
 import 'package:gank_flutter/ui/widget/widget_history_date.dart';
 import 'package:gank_flutter/utils/commonUtils.dart';
-import 'package:event_bus/event_bus.dart';
 
 class HomePage extends StatefulWidget {
-  static const String ROUTE_NAME = 'home';
+  static const String ROUTE_NAME = '/home';
 
   @override
   _HomePageState createState() => _HomePageState();
