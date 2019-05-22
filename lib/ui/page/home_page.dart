@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gank_flutter/api/api_gank.dart';
+import 'package:gank_flutter/common/event/event_change_welfare.dart';
 import 'package:gank_flutter/common/event/event_refresh_new.dart';
 import 'package:gank_flutter/common/event/event_show_history_date.dart';
 import 'package:gank_flutter/common/manager/app_manager.dart';
@@ -90,7 +91,8 @@ class _HomePageState extends State<HomePage> {
           }else if(_currentPageIndex == 1){
             // 去搜索页
           }else if(_currentPageIndex == 2){
-
+            // 切换妹纸
+            AppManager.eventBus.fire(ChangeWelfareCountEvent());
           }else{
 
           }

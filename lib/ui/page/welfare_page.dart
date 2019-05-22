@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gank_flutter/api/api_gank.dart';
+import 'package:gank_flutter/common/event/event_change_welfare.dart';
+import 'package:gank_flutter/common/manager/app_manager.dart';
 import 'package:gank_flutter/model/gank_item_entity.dart';
 import 'package:gank_flutter/ui/widget/indicator_factory.dart';
 import 'package:gank_flutter/utils/commonUtils.dart';
@@ -23,6 +25,13 @@ class _WelfarePageState extends State<WelfarePage> {
   @override
   void initState() {
     super.initState();
+    AppManager.eventBus.on<ChangeWelfareCountEvent>().listen((event) {
+      if (mounted) {
+        setState(() {
+          _isOneColumn = !_isOneColumn;
+        });
+      }
+    });
     _refresherController = RefreshController();
     _getCategoryData();
   }
@@ -45,19 +54,31 @@ class _WelfarePageState extends State<WelfarePage> {
                 footer: buildDefaultFooter(context, 0),
                 header: buildDefaultHeader(context, 0),
 
-                child: GridView.builder(
-                  itemCount: _gankItems.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.0,
-                        mainAxisSpacing: 10.0,
-                        crossAxisSpacing: 10.0),
-                    itemBuilder: (context, index) {
-                      return _buildImageWidget(
-                          _gankItems.length == 0 ? [] : _gankItems[index]);
-                    }),
-//
-//                ),
+//                child: GridView.builder(
+//                  itemCount: _gankItems.length,
+//                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                        crossAxisCount: 1,
+//                        childAspectRatio: 1.0,
+//                        mainAxisSpacing: 10.0,
+//                        crossAxisSpacing: 10.0),
+//                    itemBuilder: (context, index) {
+//                      return _buildImageWidget(_gankItems[0]);
+//                    }),
+                child: GridView.count(
+                  crossAxisCount: _isOneColumn ? 1 : 2,
+                  childAspectRatio: 1.0,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                  children: <Widget>[
+                    _buildImageWidget(_gankItems[0]),
+                    _buildImageWidget(_gankItems[1]),
+                    _buildImageWidget(_gankItems[2]),
+                    _buildImageWidget(_gankItems[3]),
+                    _buildImageWidget(_gankItems[4]),
+                    _buildImageWidget(_gankItems[5]),
+                    _buildImageWidget(_gankItems[6]),
+                  ],
+                ),
               ),
             ),
           ),
@@ -102,6 +123,11 @@ class _WelfarePageState extends State<WelfarePage> {
 
   /// 上拉加载
   void onLoadMore() {
+    print('length:${_gankItems.length}');
+    if (_gankItems.length <= 20) {
+      _refresherController.loadNoData();
+      return;
+    }
     _page++;
     _getCategoryData(loadMore: true);
   }

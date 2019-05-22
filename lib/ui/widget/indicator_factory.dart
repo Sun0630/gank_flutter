@@ -26,7 +26,8 @@ Widget buildDefaultHeader(BuildContext context, int mode) {
 
 Widget buildDefaultFooter(BuildContext context, int mode,
     [Function requestLoad]) {
-  if (mode == RefreshStatus.failed || mode == RefreshStatus.idle) {
+  // ignore: unrelated_type_equality_checks
+  if (mode == LoadStatus.loading || mode == LoadStatus.idle) {
     return new InkWell(
       child: new ClassicFooter(
 //          mode: mode,
