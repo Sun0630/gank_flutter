@@ -11,6 +11,9 @@ class StringZh extends StringBase {
   String get gankWelfare => '福利';
 
   @override
+  String get noFavorite => '暂无收藏';
+
+  @override
   List<String> get gankAllCategories => <String>[
     'All',
     'Android',

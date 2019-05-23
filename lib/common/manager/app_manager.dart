@@ -10,6 +10,8 @@ import 'package:gank_flutter/utils/sp_utils.dart';
 import 'package:redux/redux.dart';
 import 'package:event_bus/event_bus.dart';
 
+import 'favorite_manager.dart';
+
 class AppManager {
   static EventBus eventBus = EventBus();
 
@@ -18,7 +20,13 @@ class AppManager {
     try {
       // 初始化缓存
       await CacheManager.init();
-    } catch (e) {}
+      // 初始化数据库
+      await FavoriteManager.init();
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   /// 提示弹出日期选择框

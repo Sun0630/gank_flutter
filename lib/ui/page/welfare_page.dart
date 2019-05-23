@@ -15,7 +15,7 @@ class WelfarePage extends StatefulWidget {
   _WelfarePageState createState() => _WelfarePageState();
 }
 
-class _WelfarePageState extends State<WelfarePage> {
+class _WelfarePageState extends State<WelfarePage> with AutomaticKeepAliveClientMixin{
   bool _isLoading = true;
   bool _isOneColumn = true;
   int _page = 1;
@@ -190,4 +190,7 @@ class _WelfarePageState extends State<WelfarePage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -7,4 +7,6 @@ class StringBase{
   List<String> gankAllCategories;
 
   String gankWelfare;
+
+  String noFavorite;
 }

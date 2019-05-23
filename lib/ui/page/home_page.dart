@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PageController _pageController;
   List _historyData;
-  String _currentDate = '';
+  String _currentDate;
   int _currentPageIndex = 0;
 
   @override
