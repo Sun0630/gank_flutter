@@ -30,6 +30,7 @@ class FavoriteManager {
 
   /// 删除
   static remove(GankItemEntity gankItem) async {
-    await db.remove({'itemId': gankItem.itemId});
+    var removeCount = await db.remove({'url': gankItem.url});
+    print('remove count:$removeCount');
   }
 }
