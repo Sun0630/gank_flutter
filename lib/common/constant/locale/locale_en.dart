@@ -15,6 +15,15 @@ class StringEn extends StringBase{
   String get noFavorite => 'no Favorite';
 
   @override
+  String get userNameHint => 'username or email';
+
+  @override
+  String get passwordHint => 'password';
+
+  @override
+  String get loginTip => 'Please enter your Github account password or authorized login in browser.';
+
+  @override
   // TODO: implement gankAllCategories
   List<String> get gankAllCategories => <String>[
     '全部',

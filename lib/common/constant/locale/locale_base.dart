@@ -9,4 +9,10 @@ class StringBase{
   String gankWelfare;
 
   String noFavorite;
+
+  String userNameHint;
+
+  String passwordHint;
+
+  String loginTip;
 }

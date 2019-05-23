@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gank_flutter/redux/app_state.dart';
+import 'package:gank_flutter/ui/page/login_page.dart';
 import 'package:gank_flutter/ui/widget/widget_sizable_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -23,8 +24,7 @@ class _GankDrawerState extends State<GankDrawer> {
                   accountEmail: Text('sunxin0630@gmail.com'),
                   currentAccountPicture: GestureDetector(
                     onTap: () {
-                      Fluttertoast.showToast(
-                          msg: 'taptap', gravity: ToastGravity.CENTER);
+                        Navigator.of(context).pushNamed(LoginPage.ROUTER_NAME);
                     },
                     child: Container(
                       width: 55,
