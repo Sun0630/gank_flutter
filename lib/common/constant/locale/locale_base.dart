@@ -15,4 +15,24 @@ class StringBase{
   String passwordHint;
 
   String loginTip;
+
+  String pleaseLogin;
+
+  String noDesc;
+
+  String searchGanHuo;
+
+  String historyGanHuo;
+
+  String submitGankHuo;
+
+  String setting;
+
+  String about;
+
+  String starGank;
+
+  String feedbackShort;
+
+
 }

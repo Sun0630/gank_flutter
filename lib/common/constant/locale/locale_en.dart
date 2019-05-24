@@ -24,7 +24,33 @@ class StringEn extends StringBase{
   String get loginTip => 'Please enter your Github account password or authorized login in browser.';
 
   @override
-  // TODO: implement gankAllCategories
+  String get pleaseLogin => 'Please Login';
+
+  @override
+  String get noDesc => 'Nothing here';
+
+  @override
+  String get searchGanHuo => 'Search Gank';
+
+  @override
+  String get historyGanHuo => 'History gank';
+
+  @override
+  String get submitGankHuo => 'Submit gank';
+
+  @override
+  String get setting => 'Settings';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get feedbackShort => 'Feedback';
+
+  @override
+  String get starGank => 'Star Gank';
+
+  @override
   List<String> get gankAllCategories => <String>[
     '全部',
     'Android',

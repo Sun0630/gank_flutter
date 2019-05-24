@@ -23,6 +23,33 @@ class StringZh extends StringBase {
   String get loginTip => '请输入Github账号密码或者浏览器中授权登录';
 
   @override
+  String get pleaseLogin => '请先登录';
+
+  @override
+  String get noDesc => '此人很懒，什么都没写~';
+
+  @override
+  String get searchGanHuo => '搜索干货';
+
+  @override
+  String get historyGanHuo => '历史干货';
+
+  @override
+  String get submitGankHuo => '提交干货';
+
+  @override
+  String get setting => '设置';
+
+  @override
+  String get about => '关于';
+
+  @override
+  String get starGank => '点赞';
+
+  @override
+  String get feedbackShort => '反馈';
+
+  @override
   List<String> get gankAllCategories => <String>[
         'All',
         'Android',
