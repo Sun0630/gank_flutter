@@ -51,6 +51,26 @@ class StringEn extends StringBase{
   String get starGank => 'Star Gank';
 
   @override
+  String get themeSetting => 'Theme Setting';
+
+  @override
+  String get languageSetting => 'Language Setting';
+
+  @override
+  List<String> themeColorList = [
+    'Default',
+    'SeaOtter',
+    'Iris',
+    'Peacock',
+    'Lemon',
+    'Vine',
+    'Twilight',
+    'ShrimpShell',
+    'Peony',
+    'BambooPeel',
+  ];
+
+  @override
   List<String> get gankAllCategories => <String>[
     '全部',
     'Android',

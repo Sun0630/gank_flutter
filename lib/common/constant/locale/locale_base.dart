@@ -34,5 +34,12 @@ class StringBase{
 
   String feedbackShort;
 
+  String themeSetting;
+
+  String languageSetting;
+
+  List<String> themeColorList;
+
+
 
 }

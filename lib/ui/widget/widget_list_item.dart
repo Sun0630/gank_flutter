@@ -65,9 +65,12 @@ class _GankListItemState extends State<GankListItem> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Icon(widget.gankItemEntity.who.startsWith('lijinshan')
-                        ? IconData(0xe846, fontFamily: 'IconFont')
-                        : Icons.person_outline),
+                    Icon(
+                      widget.gankItemEntity.who.startsWith('lijinshan')
+                          ? IconData(0xe846, fontFamily: 'IconFont')
+                          : Icons.person_outline,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(left: 5.0),
                       child: SizedBox(

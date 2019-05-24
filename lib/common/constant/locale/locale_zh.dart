@@ -50,6 +50,27 @@ class StringZh extends StringBase {
   String get feedbackShort => '反馈';
 
   @override
+  String get themeSetting => '主题设置';
+
+  @override
+  String get languageSetting => '语言设置';
+
+  @override
+  List<String> themeColorList = [
+    '默认色',
+    '海棠红',
+    '鸢尾蓝',
+    '孔雀绿',
+    '柠檬黄',
+    '藤萝紫',
+    '暮云灰',
+    '虾壳青',
+    '牡丹粉',
+    '筍皮棕',
+  ];
+
+
+  @override
   List<String> get gankAllCategories => <String>[
         'All',
         'Android',

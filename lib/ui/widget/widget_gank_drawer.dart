@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gank_flutter/redux/app_state.dart';
 import 'package:gank_flutter/ui/page/login_page.dart';
+import 'package:gank_flutter/ui/page/setting_page.dart';
 import 'package:gank_flutter/ui/widget/widget_cion_font.dart';
 import 'package:gank_flutter/ui/widget/widget_sizable_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -125,7 +126,6 @@ class _GankDrawerState extends State<GankDrawer> with TickerProviderStateMixin {
                             height: 0,
                           ),
                         ),
-
                         ListTile(
                           leading: Icon(
                             IconFont(0xe621),
@@ -134,9 +134,14 @@ class _GankDrawerState extends State<GankDrawer> with TickerProviderStateMixin {
                           title: Text(
                             CommonUtils.getLocale(context).setting,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (ctx) {
+                              return SettingPage();
+                            }));
+                          },
                         ),
-
                         ListTile(
                           leading: Icon(
                             IconFont(0xe710),
@@ -147,7 +152,6 @@ class _GankDrawerState extends State<GankDrawer> with TickerProviderStateMixin {
                           ),
                           onTap: () {},
                         ),
-
                         ListTile(
                           leading: Icon(
                             IconFont(0xe6ab),
@@ -158,7 +162,6 @@ class _GankDrawerState extends State<GankDrawer> with TickerProviderStateMixin {
                           ),
                           onTap: () {},
                         ),
-
                         ListTile(
                           leading: Icon(
                             IconFont(0xe61a),
@@ -169,7 +172,6 @@ class _GankDrawerState extends State<GankDrawer> with TickerProviderStateMixin {
                           ),
                           onTap: () {},
                         ),
-
                       ],
                     ),
                   )
